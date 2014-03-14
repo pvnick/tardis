@@ -34,7 +34,7 @@ def make_new_json_data_file(output_filename):
     last_minutes = 0
     current_entry = {}
     all_entries = []
-    data_file = open("/opt/data/data_correct_newlines.csv", "r")
+    data_file = open("/mnt/labserver/ouch/data/data_correct_newlines.csv", "r")
     data_reader = csv.reader(data_file)
     for row in list(data_reader)[1:1000]:
         pain_score = row[7]
