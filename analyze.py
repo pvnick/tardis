@@ -6,6 +6,7 @@ import jpype
 import json
 import numpy
 from decimal import *
+import random
 
 #set decimal precision
 getcontext().prec = 3
@@ -16,8 +17,11 @@ itelligent_icon = IntelligentIcon()
 NormalAlphabet = jpype.JPackage("edu.hawaii.jmotif.sax.alphabet").NormalAlphabet
 SAXFactory = jpype.JPackage("edu.hawaii.jmotif.sax").SAXFactory
 TSUtils = jpype.JPackage("edu.hawaii.jmotif.timeseries").TSUtils
-paa_length = 10
+WordBag = jpype.JPackage("edu.hawaii.jmotif.text").WordBag
+
+paa_length = 4
 alphabet_size = 10
+window_size = 20
 
 #normal_a = NormalAlphabet()
 #ts = TSUtils.readTS("timeseries01.csv", 15)
@@ -27,16 +31,16 @@ alphabet_size = 10
 
 def get_mins_from_hhmm(hhmm):
     parts = hhmm.split(':')
-    return int(parts[0]) * 3600 + int(parts[1]) * 60
+    return int(parts[0]) * 60 + int(parts[1])
 
 def make_new_json_data_file(output_filename):
     current_subject_id = 0
     last_minutes = 0
     current_entry = {}
     all_entries = []
-    data_file = open("/mnt/labserver/ouch/data/data_correct_newlines.csv", "r")
+    data_file = open("/home/pvnick/Downloads/data_correct_newlines.csv", "r")
     data_reader = csv.reader(data_file)
-    for row in list(data_reader)[1:1000]:
+    for row in list(data_reader)[1:]:
         pain_score = row[7]
         minutes_after_surgery = get_mins_from_hhmm(row[8])
         subject_id = row[15]
@@ -48,8 +52,8 @@ def make_new_json_data_file(output_filename):
                     interpolation_func = interp1d(current_entry["minutes_after_surgery_entries"], current_entry["recorded_pain_score_entries"])
                     minutes_after_surgery_expanded = range(current_entry["minutes_after_surgery_entries"][0], current_entry["minutes_after_surgery_entries"][-1], increment_minutes)
                     interpolated_pain_timeseries_numpy_array = interpolation_func(minutes_after_surgery_expanded)
-                    interpolated_pain_timeseries_python_list = [float(Decimal(x)) for x in interpolated_pain_timeseries_numpy_array]
-                    current_entry["interpolated_pain_timeseries"] = interpolated_pain_timeseries_python_list
+                    interpolated_pain_timeseries_native_float_array = [float(x) for x in interpolated_pain_timeseries_numpy_array]
+                    current_entry["interpolated_pain_timeseries"] = interpolated_pain_timeseries_native_float_array
                     all_entries.append(current_entry)
                     #plt.plot(current_entry["minutes_after_surgery_entries"],current_entry["recorded_pain_score_entries"],'o',minutes_after_surgery_expanded,current_entry["interpolated_pain_timeseries"],'-')
                     #plt.legend(['data', 'linear'], loc='best')
@@ -69,13 +73,51 @@ def make_new_json_data_file(output_filename):
                 "sax_intelligent_icon_normalized_bitmap": []
             }
             last_minutes = 0
-            print "starting " + str(subject_id)
         if len(pain_score):
             #todo: introduce a unique identifier for sleep
             current_entry["minutes_after_surgery_entries"].append(minutes_after_surgery)
             current_entry["recorded_pain_score_entries"].append(pain_score)
+
     json_encoded = json.dumps(all_entries)
     data_out_file = open(output_filename, "w")
     data_out_file.write(json_encoded)
 
-make_new_json_data_file("/opt/data/base_structure.json")
+def load_from_data_file(input_filename):
+    return json.loads(input_filename)
+
+#make_new_json_data_file("/opt/data/base_structure.json")
+all_entries = load_from_data_file("/opt/data/base_structure.json")
+
+def get_word_bags(bag_prefix, series_chunk, window_size, paa_length, alphabet_size):
+    result = []
+    bag_id = 0
+    for series in series_chunk:
+        bag = WordBag(bag_prefix)    
+    List<WordBag> res = new ArrayList<WordBag>();
+    for (int i = 0; i < series.length / repeats; i++) {
+      WordBag bag = new WordBag(bagPrefix + String.valueOf(i));
+      for (int r = 0; r < repeats; r++) {
+        int seriesIdx = i + r;
+        String oldStr = "";
+        for (int j = 0; j < series[seriesIdx].length - windowSize; j++) {
+          double[] paa = TSUtils.paa(
+              TSUtils.zNormalize(TSUtils.subseries(series[seriesIdx], j, windowSize)), PAA_SIZE);
+          char[] sax = TSUtils.ts2String(paa, a.getCuts(ALPHABET_SIZE));
+          if (SAXCollectionStrategy.CLASSIC.equals(STRATEGY)) {
+            if (oldStr.length() > 0 && SAXFactory.strDistance(sax, oldStr.toCharArray()) == 0) {
+              continue;
+            }
+          }
+          else if (SAXCollectionStrategy.EXACT.equals(STRATEGY)) {
+            if (oldStr.equalsIgnoreCase(String.valueOf(sax))) {
+              continue;
+            }
+          }
+          oldStr = String.valueOf(sax);
+          bag.addWord(String.valueOf(sax));
+        }
+      }
+      res.add(bag);
+    }
+    return res;
+  }
