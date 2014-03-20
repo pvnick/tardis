@@ -1,0 +1,98 @@
+Webserver Available on http://localhost:4000/
+POST /test_connect.m HTTP/1.1
+Accept-Encoding: identity
+Content-Length: 23
+Host: localhost:4000
+Content-Type: application/x-www-form-urlencoded
+Connection: close
+User-Agent: Python-urllib/2.7
+
+id=python-matlab-bridge
+              Post: [1x1 struct]
+    AcceptEncoding: 'identity'
+     ContentLength: '23'
+              Host: 'localhost:4000'
+       ContentType: [1x1 struct]
+        Connection: 'close'
+         UserAgent: 'Python-urllib/2.7'
+           Content: [1x1 struct]
+
+HTTP/1.0 200 OK
+Date: Tue, 12 Oct 2010 09:19:05 GMT
+Server: Matlab Webserver
+X-Powered-By: Matlab7.14.0.739 (R2012a)
+Set-Cookie: SESSID=5322082bf473207961031e3df1f45a22; path=/
+Expires: Thu, 19 Nov 1980 08:00:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Connection: close
+Content-Length: 68
+Content-Type: text/html; charset=UTF-8
+
+
+POST /web_feval.m HTTP/1.1
+Accept-Encoding: identity
+Content-Length: 53
+Host: localhost:4000
+Content-Type: application/x-www-form-urlencoded
+Connection: close
+User-Agent: Python-urllib/2.7
+
+func_path=%2Fhome%2Fpvnick%2Ftardis%2Fmatlab%2Ficon.m
+              Post: [1x1 struct]
+    AcceptEncoding: 'identity'
+     ContentLength: '53'
+              Host: 'localhost:4000'
+       ContentType: [1x1 struct]
+        Connection: 'close'
+         UserAgent: 'Python-urllib/2.7'
+           Content: [1x1 struct]
+
+
+cols =
+
+     2
+
+
+rows =
+
+     2
+
+
+ans =
+
+    64     3
+
+
+ans =
+
+    64     3
+
+
+ans =
+
+    64     3
+
+
+ans =
+
+    64     3
+
+
+res =
+
+     1
+
+HTTP/1.0 200 OK
+Date: Tue, 12 Oct 2010 09:19:05 GMT
+Server: Matlab Webserver
+X-Powered-By: Matlab7.14.0.739 (R2012a)
+Set-Cookie: SESSID=5322082bf473207961031e3df1f45a22; path=/
+Expires: Thu, 19 Nov 1980 08:00:00 GMT
+Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+Pragma: no-cache
+Connection: close
+Content-Length: 147
+Content-Type: text/html; charset=UTF-8
+
+
