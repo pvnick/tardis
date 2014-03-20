@@ -32,16 +32,16 @@ Content-Type: text/html; charset=UTF-8
 
 POST /web_feval.m HTTP/1.1
 Accept-Encoding: identity
-Content-Length: 53
+Content-Length: 781
 Host: localhost:4000
 Content-Type: application/x-www-form-urlencoded
 Connection: close
 User-Agent: Python-urllib/2.7
 
-func_path=%2Fhome%2Fpvnick%2Ftardis%2Fmatlab%2Ficon.m
+func_path=%2Fhome%2Fpvnick%2Ftardis%2Fmatlab%2Fshow_icons.m&arguments=%7B%22encoded%22%3A+%22W3N0cnVjdCgndGl0bGUnLCAnZm9vYmFyJywgJ3BhdGNoZXMnLCBbMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUsMTZdKSwgc3RydWN0KCd0aXRsZScsICdibGFoJywgJ3BhdGNoZXMnLCBbMTcsMTgsMiwzLDUsMTIsMzQsMTQsMiw0Myw1Miw0NCw1NSw2Myw1MSwxMl0pLCBzdHJ1Y3QoJ3RpdGxlJywgJ3NvbWV0aGluZycsICdwYXRjaGVzJywgWzEsMiwzLDQsNSw2LDcsOCw5LDEwLDExLDEyLDEzLDE0LDE1LDE2XSksIHN0cnVjdCgndGl0bGUnLCAnZnVkJywgJ3BhdGNoZXMnLCBbMTcsMTgsMiwzLDUsMTIsMzQsMTQsMiw0Myw1Miw0NCw1NSw2Myw1MSwzMl0pLCBzdHJ1Y3QoJ3RpdGxlJywgJ2Nocm9uaWMgdmlsbGkgYmlvcHN5JywgJ3BhdGNoZXMnLCBbMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUsMTZdKSwgc3RydWN0KCd0aXRsZScsICduZWNyb3NpcycsICdwYXRjaGVzJywgWzE3LDE4LDIsMyw1LDEyLDM0LDE0LDIsNDMsNTIsNDQsNTUsNjMsNTEsNTNdKV0%3D%22%7D
               Post: [1x1 struct]
     AcceptEncoding: 'identity'
-     ContentLength: '53'
+     ContentLength: '781'
               Host: 'localhost:4000'
        ContentType: [1x1 struct]
         Connection: 'close'
@@ -49,9 +49,28 @@ func_path=%2Fhome%2Fpvnick%2Ftardis%2Fmatlab%2Ficon.m
            Content: [1x1 struct]
 
 
+icon_data_encoded =
+
+W3N0cnVjdCgndGl0bGUnLCAnZm9vYmFyJywgJ3BhdGNoZXMnLCBbMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUsMTZdKSwgc3RydWN0KCd0aXRsZScsICdibGFoJywgJ3BhdGNoZXMnLCBbMTcsMTgsMiwzLDUsMTIsMzQsMTQsMiw0Myw1Miw0NCw1NSw2Myw1MSwxMl0pLCBzdHJ1Y3QoJ3RpdGxlJywgJ3NvbWV0aGluZycsICdwYXRjaGVzJywgWzEsMiwzLDQsNSw2LDcsOCw5LDEwLDExLDEyLDEzLDE0LDE1LDE2XSksIHN0cnVjdCgndGl0bGUnLCAnZnVkJywgJ3BhdGNoZXMnLCBbMTcsMTgsMiwzLDUsMTIsMzQsMTQsMiw0Myw1Miw0NCw1NSw2Myw1MSwzMl0pLCBzdHJ1Y3QoJ3RpdGxlJywgJ2Nocm9uaWMgdmlsbGkgYmlvcHN5JywgJ3BhdGNoZXMnLCBbMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUsMTZdKSwgc3RydWN0KCd0aXRsZScsICduZWNyb3NpcycsICdwYXRjaGVzJywgWzE3LDE4LDIsMyw1LDEyLDM0LDE0LDIsNDMsNTIsNDQsNTUsNjMsNTEsNTNdKV0=
+
+
+icon_data = 
+
+1x6 struct array with fields:
+    title
+    patches
+
+
+icon_count =
+
+     6
+
+     6
+
+
 cols =
 
-     2
+     5
 
 
 rows =
@@ -59,27 +78,115 @@ rows =
      2
 
 
-ans =
+icon_descriptor = 
 
-    64     3
+      title: 'foobar'
+    patches: [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16]
 
+making plot1
 
-ans =
+patches =
 
-    64     3
+  Columns 1 through 15
 
+     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15
 
-ans =
+  Column 16
 
-    64     3
-
-
-ans =
-
-    64     3
+    16
 
 
-res =
+icon_descriptor = 
+
+      title: 'blah'
+    patches: [17 18 2 3 5 12 34 14 2 43 52 44 55 63 51 12]
+
+making plot2
+
+patches =
+
+  Columns 1 through 15
+
+    17    18     2     3     5    12    34    14     2    43    52    44    55    63    51
+
+  Column 16
+
+    12
+
+
+icon_descriptor = 
+
+      title: 'something'
+    patches: [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16]
+
+making plot3
+
+patches =
+
+  Columns 1 through 15
+
+     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15
+
+  Column 16
+
+    16
+
+
+icon_descriptor = 
+
+      title: 'fud'
+    patches: [17 18 2 3 5 12 34 14 2 43 52 44 55 63 51 32]
+
+making plot4
+
+patches =
+
+  Columns 1 through 15
+
+    17    18     2     3     5    12    34    14     2    43    52    44    55    63    51
+
+  Column 16
+
+    32
+
+
+icon_descriptor = 
+
+      title: 'chronic villi biopsy'
+    patches: [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16]
+
+making plot5
+
+patches =
+
+  Columns 1 through 15
+
+     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15
+
+  Column 16
+
+    16
+
+
+icon_descriptor = 
+
+      title: 'necrosis'
+    patches: [17 18 2 3 5 12 34 14 2 43 52 44 55 63 51 53]
+
+making plot6
+
+patches =
+
+  Columns 1 through 15
+
+    17    18     2     3     5    12    34    14     2    43    52    44    55    63    51
+
+  Column 16
+
+    53
+
+
+ret =
 
      1
 
@@ -92,7 +199,7 @@ Expires: Thu, 19 Nov 1980 08:00:00 GMT
 Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
 Pragma: no-cache
 Connection: close
-Content-Length: 147
+Content-Length: 845
 Content-Type: text/html; charset=UTF-8
 
 

@@ -8,17 +8,23 @@ import numpy
 import random
 from pymatbridge import Matlab
 import os
+import base64
 
 base_dir = os.path.dirname(os.path.realpath(__file__))
 matlab_path = '/usr/local/MATLAB/R2012a/bin/matlab'
-
-
 #initialise matlab bridge
+
 mlab = Matlab(port=4000, matlab=matlab_path)
 mlab.start()
 
-#mlab.run(base_dir + "/matlab/icon.m")
+icon_data_expr = "[struct('title', 'foobar', 'patches', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]), struct('title', 'blah', 'patches', [17,18,2,3,5,12,34,14,2,43,52,44,55,63,51,12]), struct('title', 'something', 'patches', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]), struct('title', 'fud', 'patches', [17,18,2,3,5,12,34,14,2,43,52,44,55,63,51,32]), struct('title', 'chronic villi biopsy', 'patches', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]), struct('title', 'necrosis', 'patches', [17,18,2,3,5,12,34,14,2,43,52,44,55,63,51,53])]"
+#i cant think of a more ghetto way to do this, but only way to pass this data through some bug in the bridge
+icon_data_expr_encoded = base64.b64encode(icon_data_expr)
+mlab.run(base_dir + "/matlab/show_icons.m", {"encoded": icon_data_expr_encoded})
+#mlab.run(base_dir + "/matlab/show_icons.m", "{'foobar',[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]; 'blah', [17,18,2,3,5,12,34,14,2,43,52,44,55,63,51,12]; 'something', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16];  'fud', [17,18,2,3,5,12,34,14,2,43,52,44,55,63,51,32]; 'chronic villi biopsy', [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]; 'necrosis', [17,18,2,3,5,12,34,14,2,43,52,44,55,63,51,53]}")
+
 #mlab.stop()
+quit()
 
 #initialize java bridge
 jvmargs = ["-Djava.class.path=./lib/jmotif.lib-0.97.jar:./lib/hackystatlogger.lib.jar:./lib/hackystatuserhome.lib.jar:./lib/weka.jar", "-Djava.library.path=./lib/rjava/jri"]
@@ -57,9 +63,14 @@ for row in list(data_reader)[1:]:
                 minutes_after_surgery_expanded = range(current_entry["minutes_after_surgery_entries"][0], current_entry["minutes_after_surgery_entries"][-1], increment_minutes)
                 interpolated_pain_timeseries_numpy_array = interpolation_func(minutes_after_surgery_expanded)
                 interpolated_pain_timeseries_native_float_array = [float(x) for x in interpolated_pain_timeseries_numpy_array]
-                current_entry["interpolated_pain_timeseries"] = Timeseries(interpolated_pain_timeseries_native_float_array, minutes_after_surgery_expanded)
-                current_entry["sax_sequence"] = SAXFactory.ts2string(current_entry["interpolated_pain_timeseries"], paa_length, normal_a, 8)
-                print(current_entry["sax_sequence"])
+                #current_entry["interpolated_pain_timeseries"] = Timeseries(interpolated_pain_timeseries_native_float_array)
+                print(",".join([str(x) for x in interpolated_pain_timeseries_native_float_array]))
+                quit()
+                #current_entry["sax"] = write_sax_sentence(
+                #    current_entry["interpolated_pain_timeseries"],
+                #    10,
+                #    )
+                #print(current_entry["sax_sequence"])
 
                 #if (max_row_length < len(interpolated_pain_timeseries_native_float_array)):
                 #    max_row_length = len(interpolated_pain_timeseries_native_float_array)
@@ -78,7 +89,7 @@ for row in list(data_reader)[1:]:
             "minutes_after_surgery_entries": [],
             "recorded_pain_score_entries": [],
             "interpolated_pain_timeseries": None,
-            "sax_sequence": "",
+            "sax_sentence": [],
             "sax_intelligent_icon_raw_bitmap": [],
             "sax_intelligent_icon_normalized_bitmap": []
         }
@@ -105,29 +116,21 @@ def load_from_data_file(input_filename):
     f = open(input_filename, 'r')
     return json.loads(f.read())
 
-def get_series_chunk_word_bag(bag_name, series_chunk, window_size, paa_length, alphabet_size):
-    global normal_a, TSUtils, SAXFactory, WordBag
-    bag = WordBag(bag_name)
-    counts = {}
-
-    for series in series_chunk:
-        print(series)
-        series_len = len(series)
-        old_str = ""
-        for window_start_index in range(series_len - window_size):
-            window = TSUtils.subseries(jpype.JArray(jpype.JDouble, 1)(series), window_start_index, window_size)
-            normalized = TSUtils.zNormalize(window)
-            paa = TSUtils.paa(normalized, paa_length)
-            blah = normal_a.getCuts(jpype.JPackage("java.lang").Integer(alphabet_size))
-            sax = str(TSUtils.ts2String(paa, blah))
-            #assuming CLASSIC sax collection strategy here
-            #see jmotif/src/edu/hawaii/jmotif/experiment/cbf/CBFHClust.java:getWordBags()
-            if (len(old_str) > 0 and sax == old_str):
-                print("continuing")
-                continue
-            old_str = sax #String.valueOf(sax);
-            bag.addWord(jpype.JString(sax));
-    return bag
+def write_sax_sentence(series, window_size, paa_length, alphabet_size):
+    global normal_a, TSUtils
+    sentence = []
+    series_len = len(series)
+    print(series)
+    print(jpype.JArray(jpype.JDouble, 1)(series))
+    quit()
+    for window_start_index in range(series_len - window_size):
+        window = TSUtils.subseries(jpype.JArray(jpype.JDouble, 1)(series), window_start_index, window_size)
+        normalized = TSUtils.zNormalize(window)
+        paa = TSUtils.paa(normalized, paa_length)
+        blah = normal_a.getCuts(jpype.JPackage("java.lang").Integer(alphabet_size))
+        sax = str(TSUtils.ts2String(paa, blah))
+        sentence.append(jpype.JString(sax));
+    return sentence
 
 #def series_to_sax_words(series, window_size):
 #    global 
