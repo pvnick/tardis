@@ -22,8 +22,6 @@ function ret = show_icons(icon_data_container)
         patches = icon_descriptor.patches
         plot(x, y, 'b-');
         hold on;
-        plot(2:0.01:2, 0:0.01:4, 'r');
-        plot(0:0.01:4, 2:0.01:2, 'r');
 
         title(icon_descriptor.title);
         % xlim([-1, 2]);

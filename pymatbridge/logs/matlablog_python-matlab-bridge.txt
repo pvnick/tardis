@@ -26,7 +26,7 @@ Expires: Thu, 19 Nov 1980 08:00:00 GMT
 Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
 Pragma: no-cache
 Connection: close
-Content-Length: 67
+Content-Length: 68
 Content-Type: text/html; charset=UTF-8
 
 
@@ -70,12 +70,12 @@ icon_count =
 
 cols =
 
-     5
+     4
 
 
 rows =
 
-     4
+     5
 
 
 icon_descriptor = 

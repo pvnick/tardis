@@ -12,17 +12,6 @@ import base64
 import math
 from scipy.stats import norm
 
-base_dir = os.path.dirname(os.path.realpath(__file__))
-matlab_path = '/usr/local/MATLAB/R2012a/bin/matlab'
-
-#initialize java bridge
-jvmargs = ["-Djava.class.path=./lib/jmotif.lib-0.97.jar:./lib/hackystatlogger.lib.jar:./lib/hackystatuserhome.lib.jar:./lib/weka.jar", "-Djava.library.path=./lib/rjava/jri"]
-jpype.startJVM(jpype.getDefaultJVMPath(), *jvmargs)
-NormalAlphabet = jpype.JPackage("edu.hawaii.jmotif.sax.alphabet").NormalAlphabet
-SAXFactory = jpype.JPackage("edu.hawaii.jmotif.sax").SAXFactory
-TSUtils = jpype.JPackage("edu.hawaii.jmotif.timeseries").TSUtils
-Timeseries = jpype.JPackage("edu.hawaii.jmotif.timeseries").Timeseries
-WordBag = jpype.JPackage("edu.hawaii.jmotif.text").WordBag
 
 def get_mins_from_hhmm(hhmm):
     parts = hhmm.split(':')
@@ -47,6 +36,7 @@ def write_sax_sentence_windowed(series, window_size, paa_length, alphabet_size):
 
 def sax_unwindowed(series, alphabet_size):
     global normal_a, TSUtils
+    #the following is copied from matlab/timeseries2symbol (written by Keogh et al)
     n = 16;
     length = len(series);
     # normalize the time series first
@@ -76,6 +66,18 @@ def sax_unwindowed(series, alphabet_size):
     sax = str(TSUtils.ts2String(paa, cuts))
     return sax
 
+base_dir = os.path.dirname(os.path.realpath(__file__))
+matlab_path = '/usr/local/MATLAB/R2012a/bin/matlab'
+
+#initialize java bridge
+jvmargs = ["-Djava.class.path=./lib/jmotif.lib-0.97.jar:./lib/hackystatlogger.lib.jar:./lib/hackystatuserhome.lib.jar:./lib/weka.jar", "-Djava.library.path=./lib/rjava/jri"]
+jpype.startJVM(jpype.getDefaultJVMPath(), *jvmargs)
+NormalAlphabet = jpype.JPackage("edu.hawaii.jmotif.sax.alphabet").NormalAlphabet
+SAXFactory = jpype.JPackage("edu.hawaii.jmotif.sax").SAXFactory
+TSUtils = jpype.JPackage("edu.hawaii.jmotif.timeseries").TSUtils
+Timeseries = jpype.JPackage("edu.hawaii.jmotif.timeseries").Timeseries
+WordBag = jpype.JPackage("edu.hawaii.jmotif.text").WordBag
+
 normal_a = NormalAlphabet()
 alphabet_size = 4
 intelligent_icon_pixels = 16
@@ -83,7 +85,7 @@ current_subject_id = 0
 last_minutes = 0
 current_entry = {}
 all_entries = []
-data_file = open("/home/pvnick/Downloads/data_correct_newlines.csv", "r")
+data_file = open("/mnt/labserver/data_correct_newlines.csv", "r")
 data_reader = csv.reader(data_file)
 
 print("interpolating time series, adding sax")
@@ -144,7 +146,7 @@ for row in range(row_pixel_count):
             #dont include 0s in our proportion calculations, they skew the predicted population mean/stddev heavily
             if raw_value > 0:
                 #TODO: ensure these are all normal!!!
-                #some don't seem to be, eg at least one appears to have two bell curves for some reason (but most seem to be normal)
+                #a couple don't seem to be, eg at least one appears to have two bell curves for some reason (but most seem to be normal)
                 #extra TODO: also, this is probably better represented as a beta distribution
                 pixel_proportions.append(float(raw_value) / float(pixel_total))
         pixel_means[row][column] = numpy.mean(pixel_proportions)
@@ -153,9 +155,11 @@ all_entries_grouped = {}
 cluster_by_key = "surgery_type"
 word_frequencies = {}
 
+print("combining patients into groups by " + cluster_by_key)
 for entry in all_entries:
     #calculated normalized bitmap for this entry
     entry["normalized_intelligent_icon_bitmap"] = icon.make_empty_bitmap(intelligent_icon_pixels)
+    tmp_flattened_bitmap = []
     for row in range(row_pixel_count):
         for column in range(row_pixel_count):
             if pixel_std_devs[row][column]:
@@ -164,6 +168,8 @@ for entry in all_entries:
             else:
                 pixel_proportion = 0
                 entry["normalized_intelligent_icon_bitmap"][row][column] = 0
+            tmp_flattened_bitmap.append(float(pixel_proportion - pixel_means[row][column]) / pixel_std_devs[row][column])
+    print(",".join([str(x) for x in tmp_flattened_bitmap]))
     #add to group
     key_value = entry[cluster_by_key]
     if key_value not in all_entries_grouped:
@@ -173,7 +179,8 @@ for entry in all_entries:
             "group_name": key_value
         }
     all_entries_grouped[key_value]["entries_in_group"].append(entry)
-print("combining normalized patient scores into groups by " + cluster_by_key)
+
+print("calculating normalized group icons")
 matlab_intelligent_icon_visualization_data_expr = "["
 add_struct_comma_to_expr = False
 for group_name in all_entries_grouped:
@@ -201,6 +208,7 @@ for group_name in all_entries_grouped:
         add_struct_comma_to_expr = True   
     matlab_intelligent_icon_visualization_data_expr = matlab_intelligent_icon_visualization_data_expr + "struct('title', '" + group_name + "', 'patches', ["
     add_pixel_comma_to_expr = False
+    #flatten the bitmap into a vector of pixels (see matlab/show_icons.m)
     for row in range(row_pixel_count):
         for column in range(row_pixel_count):
             if add_pixel_comma_to_expr:
