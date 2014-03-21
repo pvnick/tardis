@@ -26,22 +26,22 @@ Expires: Thu, 19 Nov 1980 08:00:00 GMT
 Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
 Pragma: no-cache
 Connection: close
-Content-Length: 68
+Content-Length: 67
 Content-Type: text/html; charset=UTF-8
 
 
 POST /web_feval.m HTTP/1.1
 Accept-Encoding: identity
-Content-Length: 781
+Content-Length: 2659
 Host: localhost:4000
 Content-Type: application/x-www-form-urlencoded
 Connection: close
 User-Agent: Python-urllib/2.7
 
-func_path=%2Fhome%2Fpvnick%2Ftardis%2Fmatlab%2Fshow_icons.m&arguments=%7B%22encoded%22%3A+%22W3N0cnVjdCgndGl0bGUnLCAnZm9vYmFyJywgJ3BhdGNoZXMnLCBbMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUsMTZdKSwgc3RydWN0KCd0aXRsZScsICdibGFoJywgJ3BhdGNoZXMnLCBbMTcsMTgsMiwzLDUsMTIsMzQsMTQsMiw0Myw1Miw0NCw1NSw2Myw1MSwxMl0pLCBzdHJ1Y3QoJ3RpdGxlJywgJ3NvbWV0aGluZycsICdwYXRjaGVzJywgWzEsMiwzLDQsNSw2LDcsOCw5LDEwLDExLDEyLDEzLDE0LDE1LDE2XSksIHN0cnVjdCgndGl0bGUnLCAnZnVkJywgJ3BhdGNoZXMnLCBbMTcsMTgsMiwzLDUsMTIsMzQsMTQsMiw0Myw1Miw0NCw1NSw2Myw1MSwzMl0pLCBzdHJ1Y3QoJ3RpdGxlJywgJ2Nocm9uaWMgdmlsbGkgYmlvcHN5JywgJ3BhdGNoZXMnLCBbMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUsMTZdKSwgc3RydWN0KCd0aXRsZScsICduZWNyb3NpcycsICdwYXRjaGVzJywgWzE3LDE4LDIsMyw1LDEyLDM0LDE0LDIsNDMsNTIsNDQsNTUsNjMsNTEsNTNdKV0%3D%22%7D
+func_path=%2Fhome%2Fpvnick%2Ftardis%2Fmatlab%2Fshow_icons.m&arguments=%7B%22encoded%22%3A+%22W3N0cnVjdCgndGl0bGUnLCAnRmVtYWxlIEdlbml0YWwnLCAncGF0Y2hlcycsIFszMC4wLDI2LjAsMjIuMCwyOC4wLDEsMSwyNi4wLDEsMi4wLDIzLjAsMSwxLDMwLjAsMTkuMCwyMi4wLDM4LjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ1VyaW5hcnknLCAncGF0Y2hlcycsIFsyNC4wLDE3LjAsMTguMCwzMy4wLDEuMCwxLDI1LjAsNC4wLDMuMCwyNC4wLDEsOS4wLDMwLjAsMjQuMCwyNS4wLDI5LjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ0hlbWUgYW5kIEx5bXBoYXRpYycsICdwYXRjaGVzJywgWzI0LjAsMTUuMCwxMS4wLDMyLjAsMSwxLDE5LjAsMSwxLDExLjAsMSwxLDI3LjAsMTguMCwxNi4wLDI5LjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ1JlcHJvZHVjdGl2ZSBTeXN0ZW0gJiBJbnRlcnNleCcsICdwYXRjaGVzJywgWzEsMSwxLDQ0LjAsMSwxLDEsMSwxLDEsMSwxLDIwLjAsMSw1LjAsMV0pLHN0cnVjdCgndGl0bGUnLCAnQXVkaXRvcnknLCAncGF0Y2hlcycsIFsyOS4wLDcuMCwzLjAsMzQuMCwxLDEsMTMuMCwxLDEsMTMuMCwxLDEuMCwxOC4wLDE
               Post: [1x1 struct]
     AcceptEncoding: 'identity'
-     ContentLength: '781'
+     ContentLength: '2659'
               Host: 'localhost:4000'
        ContentType: [1x1 struct]
         Connection: 'close'
@@ -51,21 +51,21 @@ func_path=%2Fhome%2Fpvnick%2Ftardis%2Fmatlab%2Fshow_icons.m&arguments=%7B%22enco
 
 icon_data_encoded =
 
-W3N0cnVjdCgndGl0bGUnLCAnZm9vYmFyJywgJ3BhdGNoZXMnLCBbMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUsMTZdKSwgc3RydWN0KCd0aXRsZScsICdibGFoJywgJ3BhdGNoZXMnLCBbMTcsMTgsMiwzLDUsMTIsMzQsMTQsMiw0Myw1Miw0NCw1NSw2Myw1MSwxMl0pLCBzdHJ1Y3QoJ3RpdGxlJywgJ3NvbWV0aGluZycsICdwYXRjaGVzJywgWzEsMiwzLDQsNSw2LDcsOCw5LDEwLDExLDEyLDEzLDE0LDE1LDE2XSksIHN0cnVjdCgndGl0bGUnLCAnZnVkJywgJ3BhdGNoZXMnLCBbMTcsMTgsMiwzLDUsMTIsMzQsMTQsMiw0Myw1Miw0NCw1NSw2Myw1MSwzMl0pLCBzdHJ1Y3QoJ3RpdGxlJywgJ2Nocm9uaWMgdmlsbGkgYmlvcHN5JywgJ3BhdGNoZXMnLCBbMSwyLDMsNCw1LDYsNyw4LDksMTAsMTEsMTIsMTMsMTQsMTUsMTZdKSwgc3RydWN0KCd0aXRsZScsICduZWNyb3NpcycsICdwYXRjaGVzJywgWzE3LDE4LDIsMyw1LDEyLDM0LDE0LDIsNDMsNTIsNDQsNTUsNjMsNTEsNTNdKV0=
+W3N0cnVjdCgndGl0bGUnLCAnRmVtYWxlIEdlbml0YWwnLCAncGF0Y2hlcycsIFszMC4wLDI2LjAsMjIuMCwyOC4wLDEsMSwyNi4wLDEsMi4wLDIzLjAsMSwxLDMwLjAsMTkuMCwyMi4wLDM4LjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ1VyaW5hcnknLCAncGF0Y2hlcycsIFsyNC4wLDE3LjAsMTguMCwzMy4wLDEuMCwxLDI1LjAsNC4wLDMuMCwyNC4wLDEsOS4wLDMwLjAsMjQuMCwyNS4wLDI5LjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ0hlbWUgYW5kIEx5bXBoYXRpYycsICdwYXRjaGVzJywgWzI0LjAsMTUuMCwxMS4wLDMyLjAsMSwxLDE5LjAsMSwxLDExLjAsMSwxLDI3LjAsMTguMCwxNi4wLDI5LjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ1JlcHJvZHVjdGl2ZSBTeXN0ZW0gJiBJbnRlcnNleCcsICdwYXRjaGVzJywgWzEsMSwxLDQ0LjAsMSwxLDEsMSwxLDEsMSwxLDIwLjAsMSw1LjAsMV0pLHN0cnVjdCgndGl0bGUnLCAnQXVkaXRvcnknLCAncGF0Y2hlcycsIFsyOS4wLDcuMCwzLjAsMzQuMCwxLDEsMTMuMCwxLDEsMTMuMCwxLDEuMCwxOC4wLDEyLjAsMTYuMCwyOS4wXSksc3RydWN0KCd0aXRsZScsICdFbmRvY3JpbmUnLCAncGF0Y2hlcycsIFsyNi4wLDE3LjAsMTYuMCwyMS4wLDEsMSwxNi4wLDEsMi4wLDE1LjAsMSwxLDIzLjAsMTkuMCwyMS4wLDMyLjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ05lcnZvdXMnLCAncGF0Y2hlcycsIFsxOS4wLDE5LjAsMjEuMCwzMC4wLDEuMCwxLDIzLjAsMS4wLDMuMCwyNC4wLDEsNi4wLDI5LjAsMjQuMCwyNS4wLDI3LjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ01hbGUgR2VuaXRhbCcsICdwYXRjaGVzJywgWzIyLjAsMTYuMCwxNS4wLDI3LjAsMi4wLDEsMTUuMCwxLDEuMCwxNC4wLDEsMSwzNC4wLDI2LjAsMjYuMCwyNi4wXSksc3RydWN0KCd0aXRsZScsICdNYXRlcm5pdHkgQ2FyZSBhbmQgRGVsaXZlcnknLCAncGF0Y2hlcycsIFsxMC4wLDIyLjAsMTcuMCwyOC4wLDEsMSwyMy4wLDEsMSw5LjAsMSwxMy4wLDIyLjAsMTQuMCw4LjAsMjIuMF0pLHN0cnVjdCgndGl0bGUnLCAnRXllIGFuZCBPcmJpdCcsICdwYXRjaGVzJywgWzEsMTUuMCwxNC4wLDE0LjAsOS4wLDEsMjMuMCwxLDUuMCwyNS4wLDEsMSw2NC4wLDE5LjAsMTYuMCwyLjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ0RpZ2VzdGl2ZScsICdwYXRjaGVzJywgWzI0LjAsMTYuMCwxOC4wLDMwLjAsMSwxLDIxLjAsMSwxLjAsMjMuMCwxLDIuMCwzNC4wLDIwLjAsMjQuMCwzMC4wXSksc3RydWN0KCd0aXRsZScsICdNdXNjdWxvc2tlbGV0YWwnLCAncGF0Y2hlcycsIFsyNS4wLDI3LjAsMjMuMCwzMC4wLDMuMCwxLDMxLjAsNC4wLDQuMCwzMC4wLDEsNS4wLDI5LjAsMzMuMCwzMi4wLDM0LjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ0ludGVndW1lbnRhcnknLCAncGF0Y2hlcycsIFsyMS4wLDI2LjAsMjQuMCwyNS4wLDMuMCwxLDMzLjAsMi4wLDkuMCwzMS4wLDEsNi4wLDMwLjAsMzEuMCwzMy4wLDMwLjBdKSxzdHJ1Y3QoJ3RpdGxlJywgJ01lZGlhc3RpbnVtIGFuZCBEaWFwaHJhZ20nLCAncGF0Y2hlcycsIFsxMS4wLDIyLjAsMTguMCwzMy4wLDcuMCwxLDI4LjAsMTUuMCwxOS4wLDI5LjAsMSw5LjAsNDMuMCwxOS4wLDI3LjAsMTguMF0pLHN0cnVjdCgndGl0bGUnLCAnUHVsbW9uYXJ5JywgJ3BhdGNoZXMnLCBbMjEuMCwxOC4wLDIxLjAsMzUuMCw2LjAsMSwyNS4wLDcuMCw2LjAsMjguMCwxLDExLjAsMzEuMCwyNi4wLDI4LjAsMjQuMF0pLHN0cnVjdCgndGl0bGUnLCAnT3RoZXInLCAncGF0Y2hlcycsIFsyNy4wLDEyLjAsMTQuMCwyOS4wLDEsMSwxNy4wLDEsMSwxOS4wLDEsMSwzMS4wLDE2LjAsMTkuMCwzMi4wXSksc3RydWN0KCd0aXRsZScsICdDYXJkaW92YXNjdWxhcicsICdwYXRjaGVzJywgWzIwLjAsMTkuMCwyMS4wLDM3LjAsNi4wLDEsMjUuMCwxNy4wLDkuMCwyOS4wLDEsMTkuMCwyNy4wLDI1LjAsMjguMCwyNC4wXSld
 
 
 icon_data = 
 
-1x6 struct array with fields:
+1x17 struct array with fields:
     title
     patches
 
 
 icon_count =
 
-     6
+    17
 
-     6
+    17
 
 
 cols =
@@ -75,13 +75,13 @@ cols =
 
 rows =
 
-     2
+     4
 
 
 icon_descriptor = 
 
-      title: 'foobar'
-    patches: [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16]
+      title: 'Female Genital'
+    patches: [30 26 22 28 1 1 26 1 2 23 1 1 30 19 22 38]
 
 making plot1
 
@@ -89,17 +89,17 @@ patches =
 
   Columns 1 through 15
 
-     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15
+    30    26    22    28     1     1    26     1     2    23     1     1    30    19    22
 
   Column 16
 
-    16
+    38
 
 
 icon_descriptor = 
 
-      title: 'blah'
-    patches: [17 18 2 3 5 12 34 14 2 43 52 44 55 63 51 12]
+      title: 'Urinary'
+    patches: [24 17 18 33 1 1 25 4 3 24 1 9 30 24 25 29]
 
 making plot2
 
@@ -107,17 +107,17 @@ patches =
 
   Columns 1 through 15
 
-    17    18     2     3     5    12    34    14     2    43    52    44    55    63    51
+    24    17    18    33     1     1    25     4     3    24     1     9    30    24    25
 
   Column 16
 
-    12
+    29
 
 
 icon_descriptor = 
 
-      title: 'something'
-    patches: [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16]
+      title: 'Heme and Lymphatic'
+    patches: [24 15 11 32 1 1 19 1 1 11 1 1 27 18 16 29]
 
 making plot3
 
@@ -125,17 +125,17 @@ patches =
 
   Columns 1 through 15
 
-     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15
+    24    15    11    32     1     1    19     1     1    11     1     1    27    18    16
 
   Column 16
 
-    16
+    29
 
 
 icon_descriptor = 
 
-      title: 'fud'
-    patches: [17 18 2 3 5 12 34 14 2 43 52 44 55 63 51 32]
+      title: 'Reproductive System & Intersex'
+    patches: [1 1 1 44 1 1 1 1 1 1 1 1 20 1 5 1]
 
 making plot4
 
@@ -143,7 +143,43 @@ patches =
 
   Columns 1 through 15
 
-    17    18     2     3     5    12    34    14     2    43    52    44    55    63    51
+     1     1     1    44     1     1     1     1     1     1     1     1    20     1     5
+
+  Column 16
+
+     1
+
+
+icon_descriptor = 
+
+      title: 'Auditory'
+    patches: [29 7 3 34 1 1 13 1 1 13 1 1 18 12 16 29]
+
+making plot5
+
+patches =
+
+  Columns 1 through 15
+
+    29     7     3    34     1     1    13     1     1    13     1     1    18    12    16
+
+  Column 16
+
+    29
+
+
+icon_descriptor = 
+
+      title: 'Endocrine'
+    patches: [26 17 16 21 1 1 16 1 2 15 1 1 23 19 21 32]
+
+making plot6
+
+patches =
+
+  Columns 1 through 15
+
+    26    17    16    21     1     1    16     1     2    15     1     1    23    19    21
 
   Column 16
 
@@ -152,38 +188,200 @@ patches =
 
 icon_descriptor = 
 
-      title: 'chronic villi biopsy'
-    patches: [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16]
+      title: 'Nervous'
+    patches: [19 19 21 30 1 1 23 1 3 24 1 6 29 24 25 27]
 
-making plot5
+making plot7
 
 patches =
 
   Columns 1 through 15
 
-     1     2     3     4     5     6     7     8     9    10    11    12    13    14    15
+    19    19    21    30     1     1    23     1     3    24     1     6    29    24    25
 
   Column 16
 
-    16
+    27
 
 
 icon_descriptor = 
 
-      title: 'necrosis'
-    patches: [17 18 2 3 5 12 34 14 2 43 52 44 55 63 51 53]
+      title: 'Male Genital'
+    patches: [22 16 15 27 2 1 15 1 1 14 1 1 34 26 26 26]
 
-making plot6
+making plot8
 
 patches =
 
   Columns 1 through 15
 
-    17    18     2     3     5    12    34    14     2    43    52    44    55    63    51
+    22    16    15    27     2     1    15     1     1    14     1     1    34    26    26
 
   Column 16
 
-    53
+    26
+
+
+icon_descriptor = 
+
+      title: 'Maternity Care and Delivery'
+    patches: [10 22 17 28 1 1 23 1 1 9 1 13 22 14 8 22]
+
+making plot9
+
+patches =
+
+  Columns 1 through 15
+
+    10    22    17    28     1     1    23     1     1     9     1    13    22    14     8
+
+  Column 16
+
+    22
+
+
+icon_descriptor = 
+
+      title: 'Eye and Orbit'
+    patches: [1 15 14 14 9 1 23 1 5 25 1 1 64 19 16 2]
+
+making plot10
+
+patches =
+
+  Columns 1 through 15
+
+     1    15    14    14     9     1    23     1     5    25     1     1    64    19    16
+
+  Column 16
+
+     2
+
+
+icon_descriptor = 
+
+      title: 'Digestive'
+    patches: [24 16 18 30 1 1 21 1 1 23 1 2 34 20 24 30]
+
+making plot11
+
+patches =
+
+  Columns 1 through 15
+
+    24    16    18    30     1     1    21     1     1    23     1     2    34    20    24
+
+  Column 16
+
+    30
+
+
+icon_descriptor = 
+
+      title: 'Musculoskeletal'
+    patches: [25 27 23 30 3 1 31 4 4 30 1 5 29 33 32 34]
+
+making plot12
+
+patches =
+
+  Columns 1 through 15
+
+    25    27    23    30     3     1    31     4     4    30     1     5    29    33    32
+
+  Column 16
+
+    34
+
+
+icon_descriptor = 
+
+      title: 'Integumentary'
+    patches: [21 26 24 25 3 1 33 2 9 31 1 6 30 31 33 30]
+
+making plot13
+
+patches =
+
+  Columns 1 through 15
+
+    21    26    24    25     3     1    33     2     9    31     1     6    30    31    33
+
+  Column 16
+
+    30
+
+
+icon_descriptor = 
+
+      title: 'Mediastinum and Diaphragm'
+    patches: [11 22 18 33 7 1 28 15 19 29 1 9 43 19 27 18]
+
+making plot14
+
+patches =
+
+  Columns 1 through 15
+
+    11    22    18    33     7     1    28    15    19    29     1     9    43    19    27
+
+  Column 16
+
+    18
+
+
+icon_descriptor = 
+
+      title: 'Pulmonary'
+    patches: [21 18 21 35 6 1 25 7 6 28 1 11 31 26 28 24]
+
+making plot15
+
+patches =
+
+  Columns 1 through 15
+
+    21    18    21    35     6     1    25     7     6    28     1    11    31    26    28
+
+  Column 16
+
+    24
+
+
+icon_descriptor = 
+
+      title: 'Other'
+    patches: [27 12 14 29 1 1 17 1 1 19 1 1 31 16 19 32]
+
+making plot16
+
+patches =
+
+  Columns 1 through 15
+
+    27    12    14    29     1     1    17     1     1    19     1     1    31    16    19
+
+  Column 16
+
+    32
+
+
+icon_descriptor = 
+
+      title: 'Cardiovascular'
+    patches: [20 19 21 37 6 1 25 17 9 29 1 19 27 25 28 24]
+
+making plot17
+
+patches =
+
+  Columns 1 through 15
+
+    20    19    21    37     6     1    25    17     9    29     1    19    27    25    28
+
+  Column 16
+
+    24
 
 
 ret =
@@ -199,7 +397,7 @@ Expires: Thu, 19 Nov 1980 08:00:00 GMT
 Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0
 Pragma: no-cache
 Connection: close
-Content-Length: 845
+Content-Length: 2725
 Content-Type: text/html; charset=UTF-8
 
 
