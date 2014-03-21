@@ -1,7 +1,6 @@
 import intelligenticons as icon
 import csv
 from scipy.interpolate import interp1d
-import matplotlib.pyplot as plt
 import jpype
 import json
 import numpy
@@ -11,7 +10,6 @@ import os
 import base64
 import math
 from scipy.stats import norm
-
 
 def get_mins_from_hhmm(hhmm):
     parts = hhmm.split(':')

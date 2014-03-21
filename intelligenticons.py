@@ -1,5 +1,4 @@
 import string
-import array 
 import math
 
 def initialize_mean_bitmap():
