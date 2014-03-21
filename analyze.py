@@ -1,4 +1,4 @@
-from intelligenticons import IntelligentIcon
+import intelligenticons as icon
 import csv
 from scipy.interpolate import interp1d
 import matplotlib.pyplot as plt
@@ -30,7 +30,6 @@ matlab_path = '/usr/local/MATLAB/R2012a/bin/matlab'
 #initialize java bridge
 jvmargs = ["-Djava.class.path=./lib/jmotif.lib-0.97.jar:./lib/hackystatlogger.lib.jar:./lib/hackystatuserhome.lib.jar:./lib/weka.jar", "-Djava.library.path=./lib/rjava/jri"]
 jpype.startJVM(jpype.getDefaultJVMPath(), *jvmargs)
-itelligent_icon = IntelligentIcon()
 NormalAlphabet = jpype.JPackage("edu.hawaii.jmotif.sax.alphabet").NormalAlphabet
 SAXFactory = jpype.JPackage("edu.hawaii.jmotif.sax").SAXFactory
 TSUtils = jpype.JPackage("edu.hawaii.jmotif.timeseries").TSUtils
@@ -90,15 +89,16 @@ def sax_unwindowed(series, alphabet_size):
     return sax
 
 normal_a = NormalAlphabet()
-max_row_length = 0
-paa_length = 4
-alphabet_size = 8
+alphabet_size = 4
+intelligent_icon_pixels = 16
 current_subject_id = 0
 last_minutes = 0
 current_entry = {}
 all_entries = []
 data_file = open("/home/pvnick/Downloads/data_correct_newlines.csv", "r")
 data_reader = csv.reader(data_file)
+
+#interpolate time series, add sax
 for row in list(data_reader)[1:]:
     pain_score = row[7]
     minutes_after_surgery = get_mins_from_hhmm(row[8])
@@ -115,8 +115,9 @@ for row in list(data_reader)[1:]:
                 current_entry["interpolated_pain_timeseries"] = interpolated_pain_timeseries_native_float_array
                 current_entry["sax"] = sax_unwindowed(
                     current_entry["interpolated_pain_timeseries"],
-                    10
+                    alphabet_size
                     )
+                current_entry["raw_intelligent_icon_bitmap"] = icon.get_raw_sequence_bitmap(current_entry["sax"], 2, alphabet_size, intelligent_icon_pixels)
                 all_entries.append(current_entry)
         current_subject_id = subject_id
         current_entry = {
@@ -128,9 +129,9 @@ for row in list(data_reader)[1:]:
             "minutes_after_surgery_entries": [],
             "recorded_pain_score_entries": [],
             "interpolated_pain_timeseries": None,
-            "sax_sentence": [],
-            "sax_intelligent_icon_raw_bitmap": [],
-            "sax_intelligent_icon_normalized_bitmap": []
+            "sax": "",
+            "raw_intelligent_icon_bitmap": [],
+            "normalized_intelligent_icon_bitmap": []
         }
         last_minutes = 0
     if len(pain_score):
@@ -138,10 +139,45 @@ for row in list(data_reader)[1:]:
         current_entry["minutes_after_surgery_entries"].append(minutes_after_surgery)
         current_entry["recorded_pain_score_entries"].append(pain_score)
 
-    json_encoded = json.dumps(all_entries)
-    data_out_file = open("/tmp/output.dat", "w")
-    data_out_file.write(json_encoded)
-
+#z normalize individual pixels
+pixel_means = icon.make_empty_bitmap(intelligent_icon_pixels)
+pixel_std_devs = icon.make_empty_bitmap(intelligent_icon_pixels)
+row_pixel_count = int(math.sqrt(intelligent_icon_pixels))
+for row in range(row_pixel_count):
+    for column in range(row_pixel_count):
+        pixel_means[row][column] = numpy.mean([entry["raw_intelligent_icon_bitmap"][row][column] for entry in all_entries])
+        pixel_std_devs[row][column] = numpy.std([entry["raw_intelligent_icon_bitmap"][row][column] for entry in all_entries])
+all_entries_grouped = {}
+cluster_by_key = "surgery_type"
+word_frequencies = {}
+for entry in all_entries:
+    #calculated normalized bitmap for this entry
+    entry["normalized_intelligent_icon_bitmap"] = icon.make_empty_bitmap(intelligent_icon_pixels)
+    for row in range(row_pixel_count):
+        for column in range(row_pixel_count):
+            if pixel_std_devs[row][column]:
+                entry["normalized_intelligent_icon_bitmap"][row][column] = (entry["raw_intelligent_icon_bitmap"][row][column] - pixel_means[row][column]) / pixel_std_devs[row][column]
+            else:
+                entry["normalized_intelligent_icon_bitmap"][row][column] = 0
+    #add to group
+    key_value = entry[cluster_by_key]
+    if key_value not in all_entries_grouped:
+        all_entries_grouped[key_value] = {
+            "intelligent_icon": icon.make_empty_bitmap(intelligent_icon_pixels),
+            "entries_in_group": [],
+            "group_name": key_value
+        }
+    all_entries_grouped[key_value]["entries_in_group"].append(entry)
+for group_name in all_entries_grouped:
+    group = all_entries_grouped[group_name]
+    for row in range(row_pixel_count):
+        for column in range(row_pixel_count):
+            avg_normalized_pixel_val = numpy.mean([entry["normalized_intelligent_icon_bitmap"][row][column] for entry in group["entries_in_group"]])
+            group["intelligent_icon"][row][column] = avg_normalized_pixel_val
+    print(group["group_name"] + ":")
+    print(group["intelligent_icon"])
+    print("\n")
+print("done without errors")
 #def series_to_sax_words(series, window_size):
 #    global 
 #    series_len = len(series)
